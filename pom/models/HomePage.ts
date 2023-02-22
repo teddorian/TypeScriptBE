@@ -35,7 +35,7 @@ constructor(page: Page) {
   this.discordLink = page.locator('a[href="https://discord.gg/65r8HRBye9"].px-11');
   this.stlLink = page.locator('a[href="https://smarttokenlabs.com/"]');
   this.brandExtenderFooter = page.locator('div.flex.flex-col a[href="https://derivatives.tokenscript.org/"]');
-  this.tokenScriptFooter = page.locator('div.flex.flex-col a[href="https://derivatives.tokenscript.org/"]');
+  this.tokenScriptFooter = page.locator('div.flex.flex-col a[href="https://www.tokenscript.org/"]');
   this.twitterFooter = page.locator('div.flex.flex-col a[href="https://twitter.com/TokenScript"]');
   this.discordFooter = page.locator('div.flex.flex-col a[href="https://discord.gg/65r8HRBye9"]');
   this.mediumFooter = page.locator('div.flex.flex-col a[href="https://medium.com/alphawallet"]');
@@ -56,12 +56,15 @@ constructor(page: Page) {
   async welcomeSectionLinks(){
     await this.emailLink.click();
     await this.twitterLink.click();
+    await this.discordLink.click();
   }
   async footerLinks(){
     await this.stlLink.click();
     await this.brandExtenderFooter.click();
     await this.tokenScriptFooter.click();
-
+    await this.twitterFooter.click();
+    await this.discordFooter.click();
+    await this.mediumFooter.click();
   }
   async connectWallet() {
     await this.visitBtn.click();

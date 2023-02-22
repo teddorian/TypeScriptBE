@@ -13,6 +13,7 @@ export class SuitUpPage {
   readonly previewBtn: Locator;
   readonly dropdownArtist: Locator;
   readonly artistStlFc: Locator;
+  readonly stlfcJersey: Locator;
 
   constructor(page: Page) {
         
@@ -28,6 +29,7 @@ export class SuitUpPage {
         this.previewBtn = page.locator('//span[text()="Preview"]');
         this.dropdownArtist = page.locator('div.dropdown-trigger');
         this.artistStlFc = page.locator('ul.dropdown-list.dropdown-list-desktop>li:nth-child(5)');
+        this.stlfcJersey = page.locator('img[src="/demo/resources/STL FC/bayc/clothes/Argentina Jersey-min.png"]');
     }
     async goto() {
         await this.page.goto('https://brandextender.io/demo/tailor/');
@@ -48,5 +50,6 @@ export class SuitUpPage {
       await this.bayc.click();
       await this.dropdownArtist.click();
       await this.artistStlFc.click();
+      await expect(this.stlfcJersey).toBeVisible();
     }
 }

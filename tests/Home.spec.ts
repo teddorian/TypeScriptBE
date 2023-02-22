@@ -20,6 +20,14 @@ test.describe('My Test Suite', () => {
     await homePage.clickLinksHeader();
   });
 
+  test('click links in Welcome Section',async () => {
+    await homePage.welcomeSectionLinks();
+  })
+
+  test('click links in Footer', async () =>{
+    await homePage.footerLinks();
+  })
+  
   test('connect wallet', async () => {
     await homePage.connectWallet();
   });

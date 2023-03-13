@@ -1,8 +1,8 @@
 import { Page, test, expect } from '@playwright/test';
-import { HomePage } from '../pom/models/HomePage';
+import { HomePage } from '../POM/models/HomePage';
 import { chromium } from 'playwright';
 
-test.describe('My Test Suite', () => {
+test.describe('Home page test from Notion doc', () => {
   let page: Page;
   let homePage: HomePage;
   
@@ -27,8 +27,9 @@ test.describe('My Test Suite', () => {
   test('click links in Footer', async () =>{
     await homePage.footerLinks();
   })
-  
+
   test('connect wallet', async () => {
-    await homePage.connectWallet();
+    await homePage.connectWalletBtn();
   });
+
 });

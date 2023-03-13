@@ -28,6 +28,7 @@ export class HomePage {
   readonly dropdownTriggerSelector: Locator;
   readonly dropdownItemSelector: Locator;
   readonly mobileMenu: Locator;
+  readonly closeMobileMenu: Locator;
 
 constructor(page: Page) {     
   this.page = page;
@@ -42,8 +43,9 @@ constructor(page: Page) {
   this.twitterHeader = page.locator('div.hidden a[href="https://twitter.com/TokenScript"]');
   this.m_twitter = page.locator("div.mb-8 a[href='https://twitter.com/TokenScript']");
   this.discordHeader = page.locator('div.hidden a[href="https://discord.gg/65r8HRBye9"]');
-  this.m_discord = page.locator('div.hidden a[href="https://discord.gg/65r8HRBye9"]');
+  this.m_discord = page.locator("aside .mb-8 a[href='https://discord.gg/65r8HRBye9']");
   this.mediumHeader = page.locator('div.hidden a[href="https://medium.com/alphawallet"]');
+  this.m_medium = page.locator("aside .mb-8 a[href='https://medium.com/alphawallet'] span");
   this.emailLink = page.locator('a[href="mailto:sayhi@smarttokenlabs.com"]');
   this.twitterLink = page.locator('a[href="https://twitter.com/TokenScript"].px-11');
   this.discordLink = page.locator('a[href="https://discord.gg/65r8HRBye9"].px-11');
@@ -53,10 +55,10 @@ constructor(page: Page) {
   this.twitterFooter = page.locator('div.flex.flex-col a[href="https://twitter.com/TokenScript"]');
   this.discordFooter = page.locator('div.flex.flex-col a[href="https://discord.gg/65r8HRBye9"]');
   this.mediumFooter = page.locator('div.flex.flex-col a[href="https://medium.com/alphawallet"]');
-  this.m_medium = page.locator('div.hidden a[href="https://medium.com/alphawallet"]');
   this.dropdownTriggerSelector = page.locator('div.relative div.flex button');
   this.dropdownItemSelector = page.locator('#routify-app > div:nth-child(2) > div > section > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2)');
   this.mobileMenu = page.locator('div#menu-icon');
+  this.closeMobileMenu = page.locator('div.w-8.cursor-pointer');
 }
   
   
@@ -78,22 +80,24 @@ constructor(page: Page) {
   }
 
   async clickMobileLinksFromMenu(){
-    await this.mobileMenu.click();
-    await this.m_browse.click();
-    await this.mobileMenu.click();
+    
     const [newPage] = await Promise.all([
     this.page.waitForEvent('popup', { timeout: 10000 }),
+    await this.mobileMenu.click(),
+    await this.m_browse.click(),
+    await this.mobileMenu.click(),
     await this.m_brandExtender.click(),
     await this.mobileMenu.click(),
     await this.m_tokenScript.click(),
     await this.mobileMenu.click(),
     await this.m_twitter.click(),
+    await this.closeMobileMenu.click(),
     await this.mobileMenu.click(),
     await this.m_discord.click(),
-    await this.mobileMenu.click(),
     await this.m_medium.click()
   ]);
   expect(newPage).toBeTruthy();
+  await newPage.close();
   }
   
   async welcomeSectionLinks(){

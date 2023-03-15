@@ -18,7 +18,9 @@ export class HomePage {
   readonly m_medium: Locator;
   readonly emailLink: Locator;
   readonly twitterLink: Locator;
+  readonly m_twitterLink: Locator;
   readonly discordLink: Locator;
+  readonly m_discordLink: Locator;
   readonly stlLink: Locator;
   readonly brandExtenderFooter: Locator;
   readonly tokenScriptFooter: Locator;
@@ -48,7 +50,9 @@ constructor(page: Page) {
   this.m_medium = page.locator("aside .mb-8 a[href='https://medium.com/alphawallet'] span");
   this.emailLink = page.locator('a[href="mailto:sayhi@smarttokenlabs.com"]');
   this.twitterLink = page.locator('a[href="https://twitter.com/TokenScript"].px-11');
+  this.m_twitterLink = page.locator('div.mt-12 a[href="https://twitter.com/TokenScript"]');
   this.discordLink = page.locator('a[href="https://discord.gg/65r8HRBye9"].px-11');
+  this.m_discordLink = page.locator('div.mt-12 a[href="https://discord.gg/65r8HRBye9"]');
   this.stlLink = page.locator('a[href="https://smarttokenlabs.com/"]');
   this.brandExtenderFooter = page.locator('div.flex.flex-col a[href="https://derivatives.tokenscript.org/"]');
   this.tokenScriptFooter = page.locator('div.flex.flex-col a[href="https://www.tokenscript.org/"]');
@@ -100,6 +104,17 @@ constructor(page: Page) {
   await newPage.close();
   }
   
+  async welcomeSectionLinksMobile(){
+    const [newPage] = await Promise.all([
+    this.page.waitForEvent('popup', { timeout: 5000 }),
+    this.page.mouse.wheel(0, 300),
+    this.emailLink.click(),
+    this.m_twitterLink.click(),
+    this.m_discordLink.click(),
+    ]);
+    expect(newPage).toBeTruthy();
+  }
+
   async welcomeSectionLinks(){
     const [newPage] = await Promise.all([
     this.page.waitForEvent('popup', { timeout: 5000 }),

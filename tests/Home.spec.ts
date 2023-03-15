@@ -2,7 +2,7 @@ import { Page, test, expect } from '@playwright/test';
 import { HomePage } from '../POM/models/HomePage';
 import { chromium } from 'playwright';
 
-test.describe('Home page test from Notion doc', () => {
+test.describe('Home page test from Notion doc for web', () => {
   let page: Page;
   let homePage: HomePage;
   
@@ -28,7 +28,7 @@ test.describe('Home page test from Notion doc', () => {
     await homePage.footerLinks();
   })
 
-  test('connect wallet', async () => {
+  test('connect wallet modal opened', async () => {
     await homePage.connectWalletBtn();
   });
 

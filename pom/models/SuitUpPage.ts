@@ -22,6 +22,7 @@ export class SuitUpPage {
   readonly edit: Locator;
   readonly customizeAnother: Locator;
   readonly coolCats: Locator;
+  readonly coolCatsMobile: Locator;
   readonly clothingCoolCats: Locator;
   readonly remove: Locator;
   readonly mintBtn: Locator;
@@ -46,11 +47,12 @@ constructor(page: Page) {
   this.walesJersey = page.locator('img[src="/demo/resources/STL FC/bayc/clothes/Wales Jersey-min.png"]');
   this.counterPlus = page.locator("img[alt='plus']");
   this.counterMinus = page.locator("img[alt='minus']");
-  this.edit = page.locator("//*[@id='routify-app']/div[2]/main/section/div[2]/div[2]/div[1]/div[2]/div[1]/div/span");
+  this.edit = page.locator('//*[@id="routify-app"]/div[2]/main/section/div[2]/div[2]/div[4]/div[1]');
   this.customizeAnother = page.locator('div.order-last .be-button');
   this.coolCats = page.locator("img[alt='9812']");
+  this.coolCatsMobile = page.locator('//*[@id="routify-app"]/div[2]/main/div/div[2]/div[4]/div');
   this.clothingCoolCats = page.locator('img[src="/demo/resources/Devcon/coolcats/clothes/D CC Outfit Logo 1-min.png"]');
-  this.remove = page.locator('//*[@id="routify-app"]/div[2]/main/section/div[2]/div[2]/div[1]/div[2]/div[2]/div/span');
+  this.remove = page.locator('//*[@id="routify-app"]/div[2]/main/section/div[2]/div[2]/div[4]/div[2]');
   this.mintBtn = page.locator('div.w-full div.w-full:nth-child(2)');
   }
 async goto() {
@@ -70,7 +72,7 @@ async Suitup() {
     await this.page.goBack();
     }
     console.log(`Current URL: ${this.page.url()}`);
-    }
+  }
 async Dropdown() {
   await this.bayc.click();
   await this.dropdownArtist.click();
@@ -100,4 +102,43 @@ async Preview(){
   await this.remove.click();
   await this.mintBtn.click();
 }
+async SuitupMobile() {
+  await this.bayc.click();
+  await this.page.mouse.wheel(0, 400);
+  await this.clothing.click();
+  await this.page.mouse.wheel(0, 400);
+  await this.accessories.click();
+  await this.page.mouse.wheel(0, 400);
+  await this.background.click();
+  await this.closeIconBackground.click();
+  await this.royalties.click();
+  await expect(this.modalTitle).toBeVisible();
+  await this.royaltiesCloseIcon.click();
+    if (!this.page.isClosed()) {
+    await this.page.goBack();
+    }
+    console.log(`Current URL: ${this.page.url()}`);
+  }
+  async PreviewMobile(){
+    await this.bayc.click();
+    await this.cancelBtn.click();
+    await this.bayc.click();
+    await this.page.mouse.wheel(0, 300);
+    await this.clothing.click();
+    await this.counterPlus.click();
+    await this.counterPlus.click();
+    await this.previewBtn.click();
+    await this.edit.click();
+    await this.counterMinus.click();
+    await this.counterMinus.click();
+    await this.previewBtn.click();
+    await this.customizeAnother.click();
+    await this.page.mouse.wheel(0, 300);
+    await this.coolCatsMobile.click();
+    await this.page.mouse.wheel(0, 400);
+    await this.clothingCoolCats.click();
+    await this.previewBtn.click();
+    await this.remove.click();
+    await this.mintBtn.click();
+  }
 }

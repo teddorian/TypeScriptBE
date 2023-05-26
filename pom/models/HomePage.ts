@@ -34,10 +34,14 @@ export class HomePage {
 
 constructor(page: Page) {     
   this.page = page;
-  this.visitBtn = page.locator('div[class="lg:mt-8 lg:flex"] button');
-  this.modalTitle = page.locator('h4.mx-auto.mt-10');
-  this.browse = page.locator("a[href='/demo/browse']:first-child");
-  this.m_browse = page.locator("div.mt-9 a[href='/demo/browse']")
+  this.visitBtn = page.getByRole('button', { name: /Connect Wallet/ });
+  //this.visitBtn = page.locator('div[class="lg:mt-8 lg:flex"] button');
+  this.modalTitle = page.getByRole('heading', { name: 'Connect your wallet' });
+  //this.modalTitle = page.locator('h4.mx-auto.mt-10');
+  this.browse = page.getByRole('link', {name: 'Browse'});
+  //this.browse = page.locator("a[href='/browse'].mr-6");
+  this.m_browse = page.getByRole('link', {name: 'Browse'});
+  //this.m_browse = page.locator("div.mt-9 a[href='/demo/browse']")
   this.brandExtender = page.locator("div.hidden.items-center [alt='Brand Extender']");
   this.m_brandExtender = page.locator("div.mt-9 a[href='https://derivatives.tokenscript.org/']");
   this.tokenScript = page.locator("div.hidden.items-center [alt='TokenScript']");
@@ -59,7 +63,8 @@ constructor(page: Page) {
   this.twitterFooter = page.locator('div.flex.flex-col a[href="https://twitter.com/TokenScript"]');
   this.discordFooter = page.locator('div.flex.flex-col a[href="https://discord.gg/65r8HRBye9"]');
   this.mediumFooter = page.locator('div.flex.flex-col a[href="https://medium.com/alphawallet"]');
-  this.dropdownTriggerSelector = page.locator('div.relative div.flex button');
+  this.dropdownTriggerSelector = page.locator('div.relative text-[#000]');
+  //this.dropdownTriggerSelector = page.locator('div.menu-container.svelte-cdecrt');
   this.dropdownItemSelector = page.locator('#routify-app > div:nth-child(2) > div > section > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2)');
   this.mobileMenu = page.locator('div#menu-icon');
   this.closeMobileMenu = page.locator('div.w-8.cursor-pointer');
@@ -67,7 +72,7 @@ constructor(page: Page) {
   
   
   async goto() {
-    await this.page.goto('https://brandextender.io/demo/', { waitUntil: 'networkidle' });
+    await this.page.goto('https://demo.brandextender.io/', { waitUntil: 'networkidle' });
   }
 
   async clickLinksHeader(){

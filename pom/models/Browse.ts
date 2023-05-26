@@ -8,13 +8,13 @@ export class BrowsePage {
 
   constructor(page: Page) {     
     this.page = page;
-    this.browseLink = page.locator("a[href='/demo/browse']");
-    this.viewAll4636 = page.locator('[id="routify-app"] div main div div:nth-child(2) div:nth-child(5) div:nth-child(2) button:nth-child(2)');
+    this.browseLink = page.getByRole('link', {name: 'Browse'});
+    this.viewAll4636 = page.locator('//*[@id="routify-app"]/div[2]/main/div/div[2]/div[3]/div[1]/div[2]/div[2]/button[2]/span');
     this.wow9211 = page.locator('div.text-left.font-bold.text-2xl:has-text("WOW #9211-0")');
   }
 
   async goto() {
-    await this.page.goto('https://brandextender.io/demo/', { waitUntil: 'networkidle' });
+    await this.page.goto('https://demo.brandextender.io/', { waitUntil: 'networkidle' });
   }
 
   async browseTest(){
